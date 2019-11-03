@@ -23,6 +23,12 @@ body {
   margin: 0;
   background-color: #fff;
   color: #000; }
+/*******************************
+* Own styles
+*********************************/
+.title {
+  color: orangered !important;
+}
 
 /*********************************************
  * VIEW FRAGMENTS

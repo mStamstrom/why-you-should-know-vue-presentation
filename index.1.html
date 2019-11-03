@@ -1,0 +1,331 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SvelteJS - framtidens UI ramverk?</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+						
+	<section>
+		</section>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<section><h1 class="title">SvelteJS - framtidens UI ramverk?</h1>
+						<aside class="notes">
+							Välkomna till denna kodkväll där vi ska prata om UI ramverk och framförallt prata om hur framtiden för UI ramverk ser ut, med fokus på SvelteJS som det nya heta UI ramverken.
+							<br/>
+							<br/>
+							MEN innan vi börjar UI ramverk, ska vi kolla tillbaka i historien och se vilka lärdomar vi kan ta ifrån historien. Vi börjar på år 1969.
+						</aside>
+					</section>
+					<section>
+						<h1 class="title">Lanpar technologies</h1>
+						<img src="img/Lanpar.jpg"/>
+						<aside class="notes">
+							Det hände mycket på 1969. Många kanske tänker på att det var året som den första månlandningen genomfördes. Men det hände något mycket mer intressant, LanPar technology hände.
+							<br/>
+							<br/>
+							Lanpar technologies skapades av Remy Landau och Rene Pardo och det var dem som skapade det första spreadsheetet på en dator. Mycket av dem som fanns 1969, återfinns i dagens spreadsheets och framförallt:
+						</aside>
+					</section>
+					<section>
+						<h1 class="title">Forward referencing </h1>
+						<aside class="notes">
+							Forward Referencing	– eller som vi idag kallar det för, reactive programming och det ska vi prata mer om nu.
+						</aside>
+					</section>
+					<section>
+						<h1 class="title">Spreadsheet</h1>
+						<img src="img/spreadSheet.jpg_large"/>
+						<aside class="notes">
+							Många vet säkert redan hur ett spreadsheet fungerar, men vi går igenom det ändå. Vi har en tabell som innehåller värden i 2 kolumner och en kolumn med formler.
+							<br/>
+							<br/>
+							Ändrar vi något av värdena kommer formel kolumnen att uppdateras. Detta möjligörs genom att det finns en intern dependecy graf över vilka celler som är beroende på andra celler. Den stor fördelen med detta sätt, är att när ett värde uppdateras kommer vi enbart uppdatera dem celler som är beroende till den uppdaterade cellen och lämna resterande celler oförändrade. Detta var en stor grej på 1969, då man inte hade så mycket dator kraft och är något som vi kan ta inspiration från även idag.
+							<br/>
+							<br/>
+							Tyvärr blev den ingen success för Lanpar industries, kanske var dem före sin tid.
+						</aside>
+					</section>
+				</section>
+				<section>
+					<h3 class="title">Vad är reactive programmering?</h3>
+					<qoute>” The essence of functional reactive programming is to specify the dynamic behavior of a value completely at the time of declaration.” – Henrich Apfelmus</qoute>
+					<aside class="notes">Vi pratar ofta om att våra webb applikationer är reaktiva, Men vad är reaktivitet?
+							<br/>
+							<br/>
+						Läsa citat.
+						<br/>
+						<br/>
+						Så reaktiv programmering handlar om data flöde och att spåra data flöde och uppdatera det som har förändrats. Vi tar med oss den här definitionen genom presentationen</aside>
+				</section>
+				<section>
+					<img src="img/react.jpeg" />
+					<aside class="notes">React förändrade frontenden ifrån att det släpptes 2013 och har förändrat sättet vi tänker kring frontend och hur man bygger webb applikationer. React teamet jobbar även hårt med att lösa problem som vi inte visste att vi haft sedan tidigare. Men finns det något bättre än react? Är react den ultimata lösningen eller kan vi komma fram till något ännu bättre? Jag tror det och ikväll ska vi kolla på hur!
+							<br/>
+							<br/>
+					Så är React och Vue reaktiva ramverk, enligt vår tidigare definition? Vi svarar på den frågan snart, men först ska vi prata om den virtuella domen.
+					</aside>
+				</section>
+				<section>
+					<h3 class="title">Virtual DOM</h3>
+						<iframe src="https://codesandbox.io/embed/frosty-thompson-8nqo0?fontsize=14&module=%2Fsrc%2FApp.jsx" title="frosty-thompson-8nqo0" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+					<aside class="notes">Vi säger ofta att den VDOM är snabb och att ett ramverk använder en VDOM gör det till ett snabbt ramverk. Men är det verkligen så?
+							<br/>
+							<br/>
+					Gå igenom koden och sedan visa hur diffing fungerar!
+					Nämn att denna koden körs varje gång någonting ändras i statet. Deklarerar om functioner och liknande.
+					<br/>
+					<br/>
+					Så react har ingen förståelse för hur datat flödar genom vår applikation och hanterar applikationen som en blackbox. Renderar ofta om för stora delar av applikationen, trots att bara en liten del har förändrats. Så per vår definition är inte react reaktivt.
+					React är faktiskt ett dåligt namn för React, eftersom det inte stödjer reaktiv programmering.
+					</aside>
+				</section>
+				<section>
+					<h3 class="title">Nackdelar med virtual DOM</h3>
+					<ul>
+						<li class="fragment fade-up">Abstraction läckor</li>
+						<ul class="fragment fade-up">
+							<li>ShouldComponentUpdate</li>
+							<li>Pure.Component</li>
+							<li>useMemo</li>
+						</ul>
+						<li class="fragment fade-up">Concurrent mode</li>
+					</ul>
+					<aside class="notes">
+						Är VDOM snabb? Nej, för vi gör DOM diffing plus att uppdatera domen, visst vi samlar upp alla uppdateringar som behöver göras, men det är ändå mer arbete än att enbart uppdatera DOM
+						<br/>
+							<br/>
+						Är VDOM snabb nog? I vissa fall räcker det beroende på vilken applikation man kör.
+						Tycker React teamet att VDOM är snabb nog? Troligtvis inte, annars hade vi inte haft api för att förhindra en komponent att uppdatera under vissa förhållanden genom dessa metoder. Vad dem här metoderna gör att under vissa omständigheter förhindra ett subträd av en applikation att uppdatera.
+						<br/>
+							<br/>
+						När man använder dessa tekniker behövs även något som kallas concurrent mode, det som jag brukar kalla för asynkron rendering. När man kör React default som låser man upp main tråden under renderingen, om ens webb app kräver mycker tid för att uppdatera kommer UI att låsa sig tills att uppdateringen är klar vilket är en dålig användarupplevelse. Concurrent mode är en lösning på det här när man delar upp sin rendering i olika time slices för att inte låsa upp main tråden under lika lång tid. Men det här löser inte problemet att vår applikation är långsam att uppdatera, det bara upplevs som snabbare. Vi får också olika states i olika komponenter tills allt har uppdaterat. Det är en abstraktion som vi helst vill undvika
+					</aside>
+				</section>
+				<!-- <section>
+					<section>
+						<aside class="notes">
+								Så hur ska vi tänka kring UI ramverk? Måste det vara något som laddas in i webbläsaren? Vad vill vi få ut av ett UI ramverk?
+								// todo utveckla
+						</aside>
+					</section>
+					<section>
+						<img src="img/rehinking UI frameworks.jpg_large"/>
+						
+						<aside class="notes">
+							Läsa citat
+							Så tänker vi fel kring att vi UI ramverket är något som alltid ska med till browsern, Kan vi istället inkludera det i vårt byggsteg och skippa ramverket i browsern?
+						</aside>
+					</section>
+				</section> -->
+				<section>
+					<section>
+						<img src="img/svelte.png"/>
+						<aside class="notes">
+							SvelteJS är ett UI ramverk, likt React och Vue, men den stora skillanden att det är en kompilator istället för något som ligger inkluderat i bundlen. 
+							Den initiala iden bakom skapandet av SvelteJS var att vi får allt större bundles och att skippa UI ramverket i bundlen skulle få ner storleken. 
+							<br/>
+							<br/>
+							Efter 3 iterationer av SvelteJS är inte detta längre en av dem större fördelarna även om det är en stor fördel. Dem andra fördelarna kommer vi spenderar resten av presentationen att prata om, som även står på bilden.
+							Dem tre stora fördelarna med SvelteJS är: Lite/ingen boilerplate, performance och write less/do more. Som vi ska kolla närmare på.
+						</aside>
+					</section>
+					<section>
+						<h3 class="title">En kompilator?</h3>
+						<aside class="notes">
+							Vissa kanske är som jag när jag hörde att Svelte är ett UI ramverk, fast det är en kompilator. Men det visar sig att den faktiskt fungerar väldigt bra.
+							Så vid byggsteget tar svelteJS vår kod, som är skriven på samma declarativt sätt som man skriver i React eller Vue och kompilerar om det till hög performant 
+							imperetativ kod (reaktiv kod) som kan köras i webbläsaren.
+							<br/>
+							Så vår kod körs bara en gång istället för varje gång som någon del av statet i vår applikation ändras. Vår kod blir statiskt istället för dynamisk vilket
+							ger några andra problem som behöver lösas.
+							<br/>
+							<br/>
+							SvelteJs är ett språk, inte ett ramverk. Eftersom Svelte är en kompilator, så behöver man inte följa alla regler som ett UI ramverk inkluderat i browsern behöver. Vi skriver fortfarande i JS, så all kod behöver vara giltig JS, men behöver inte följa vissa andra regler.
+							<br/>
+							<br/>
+							Eftersom Svelte är en kompilator, är all vår kod statisk och med detta så måste vi hantera reaktivitet på annat sätt än vad befintliga UI ramverk gör.
+						</aside>
+					</section>
+					<section>
+							<h3 class="title">Declarative vs. Imperative code</h3>
+							<div>Ett exempel: Hur tar jag mig till Domkyrkan?</div>
+							<ul style="padding-top: 20px;padding-left: 50px;">
+								<li class="fragment fade-up">Addressen är: Domkyrkoplan, 753 10 Uppsala (Declarative)</li>
+								<li class="fragment fade-up">Ta Svartbäcksgatan och Luthagsesplanaden mot Kyrkogårdsgatan (6 km). Fortsätt på Kyrkogårdsgatan. Ta Övre Slottsgatan och Drottninggatan mot S:t Eriks torg (Imperative)</li>
+							</ul>
+							<aside class="notes">
+								Declarative code - input -> black-box -> output (what)
+								Imperative code - input -> give instructions -> output (how)
+							</aside>
+						</section>
+				</section>
+				<section>
+					<h3 class="title">Reaktivitet med assignmnet</h3>
+					<iframe src="https://codesandbox.io/embed/young-shadow-dgmh2?fontsize=14&module=%2FApp.svelte" title="svelte-1" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+					<aside class="notes">
+						Nog om teori, låt oss kolla på hur man skriver kod i Svelte. En svelte komponent är en HTML fil i grunden, fast med .svelte ändelsen. Kan lägga in JS i en script tag och css i en style tag. Resten kommer tolkas som HTML.
+						<br/>
+						<br/>
+						Men eftersom vår kod bara kör en gång, skilt från andra ramverk som körs i browsern, så kommer ingen uppdateringar att ske. Vi måste säga till kompilatorn att här har någonting uppdaterats. Som tur är finns det redan en operation för att göra det och det är assignment operatorn. Notera även att det inte finns något this i komponenten. Eftersom Svelte är en kompilator, behöver vi inte komplicera oss med this, utan att beräknas innan.
+						<br/>
+						<br/>
+						Men den här koden är inte reaktiv än!
+						<br/>
+						<br/>
+						använd bind:value istället för on:input och onclick i html
+					</aside>
+				</section>
+				<section>
+					<section>
+						<h3 class="title">Inte fullt reaktivt än</h3>
+						<iframe src="https://codesandbox.io/embed/svelte-complete-reactivity-v4otm?fontsize=14" title="svelte-complete-reactivity" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+						<aside class="notes">
+							Men vi är inte fullt reaktiva än, hittills kan vi bara vara reaktiva på state variabler. Vi behöver även kunna göra andra beräkningar när state variabler ändras. För detta används subscription och någonting som kallas topoligical order.
+							<br/>
+							Lägg till $: som är en subscription enligt topoligical ordning, så den räknas ut efter att dem värdena den beror på har blivit uträknade. $: är ett labelled statement i javascript, den gör egentligen ingenting, men är fortfarande valid JS och därför kan svelte använda den som ett reaktivitets tecken.
+							<br/>
+							<br/>
+							Lägg till en showing del
+						</aside>
+					</section>
+					<section>
+						<h3 class="title">topoligical order</h3>
+						<img src="img/observables.PNG" />
+						<aside class="notes">
+							observables fungerar ungefär som spreadsheets. Om statement a beror på statement b, statement a kommer inte beräknas förän statement b har räknats ut.
+							<br />
+							Men hur får vi in det här i Javascript och mer in i språket SvelteJS. Jo, vi tar ett tecken som nästan ingen använder, och använder det som en subscription typ.
+						</aside>
+					</section>
+				</section>
+				<section>
+					<h1 class="title">Performance</h1>
+					<ul>
+						<li class="fragment fade-up">Finns olika typer av performance</li>
+						<li class="fragment fade-up">
+							Det nya inom webben enheter
+							<ul>
+								<li class="fragment fade-up">Warebells</li>
+								<li class="fragment fade-up">SmartTv</li>
+								<li class="fragment fade-up">Många enheter som har små resurser men ändå behöver bygga ett bra och snabbt UI</li>
+							</ul>
+						</li>
+					</ul>
+					<aside class="notes">
+						SvelteJS har en stor fördel när den kommer till performance. Eftersom koden bara körs en kod och uppdaterar enbart det som har förändrats, så kommer web applikationen vara mycket snabbare.
+						Den tar även mindre plats vilket leder till snabbar laddtider.
+						<br/>
+						<br/>
+						
+						Men det nya för UI är inte på webben, inte heller är det för mobilen. Utan det nya är Warebells. Klockor, smartTv, underhållningssystem i bilen, alla dessa delar och för dem här delarna kommer vi behöva något smartare än react och Vue. Något som tar mindre plats och är effektivare att köra. och det känns som Svelte passar bra in här.
+					</aside>
+				</section>
+				<section>
+					<h3 class="title">Benchmark</h3>
+						<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">well wouldya look at that <a href="https://t.co/HtaxGFY5AN">pic.twitter.com/HtaxGFY5AN</a></p>&mdash; Rich Harris (@Rich_Harris) <a href="https://twitter.com/Rich_Harris/status/1065992585095929857?ref_src=twsrc%5Etfw">November 23, 2018</a></blockquote>
+						<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+						<aside class="notes">
+							Dessa benchmark kanske är ganska meningslösa, men vissar i vilket fall att Svelte är snabbt. Men eftersom det är ett UI ramverk så är det UI upplevelsen som är den viktiga och jag rekommenderar er att gå in på Svelte hemsidan och se
+							presentationen när Rich Harris jämför Svelte med Reacts asynkrona uppdatering (concurrent mode)
+						</aside>
+				</section>
+				<section>
+						<h1 class="title">Svelte exempel</h1>
+							<iframe src="https://svelte.dev/tutorial/basics" title="svelte-todo-app" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:600px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+						<aside class="notes">
+							Vissa $$invalidate
+							<br/>
+							scoped CSS som tas bort on den inte används, updating arrays and objects
+							<br/>
+							visa transition in and out
+							<br/>
+							Visa store
+							<br/>
+							Svelte kan vara det här fullskalliga ramverket eftersom dem delar som inte används kan treeshakas bort i kompileringen och kommer aldrig med ut i bundeln.
+						</aside>
+				</section>
+				<section>
+					<h3 class="title">Utöver SvelteJS</h3>
+					<ul>
+						<li class="fragment fade-up">Sapper</li>
+						<li class="fragment fade-up">Svelte Native</li>
+						<li class="fragment fade-up">Typescript</li>
+					</ul>
+					<aside class="notes">
+						Sapper är ett alternativ för dem som vill bygga mer enterprise lösningar, där mer delar finns inkluderat som webpack, lazy loading, routing, E2E tester och massa mer saker.
+						<br/>
+						<br/>
+
+						Finns även ett projekt som heter Svelte Native för att bygga applikationer till android och IOS.
+						<br/>
+						<br/>
+
+						Det som ligger högst upp för Svelte teamet just nu är att få en typescript.
+					</aside>
+				</section>
+				<section>
+					<h3 class="title">Är SvelteJS framtiden?</h3>
+					<ul>
+						<li class="fragment fade-up">Behöver få fotfäste i marknaden</li>
+						<li class="fragment fade-up">Lätt att lära sig</li>
+						<li class="fragment fade-up">Fullstackat med features, enbart dem du använder blir inkluderade</li>
+						<li class="fragment fade-up">Performance</li>
+					</ul>
+					<aside class="notes">
+						Jag tror att ramverk som Svelte, kommer ta över mer och mer. Men detta är också så klart beroende på att flera stora företag börjar använda ramverket för att det ska få fotfäste.
+						<br/>
+						<br/>
+
+						Jag tycker Svelte vissar på ett enklare sätt att skriva deklarativ kod jämfört med Vue och React och göra det lättare att lära sig för nya till UI ramverken. Jag gillar också att det är HTML som är grund språket och att man föra in JS i HTML istället för tvärtom, vilket gör det lättare för dem som kan HTML att starta med Svelte.
+						<br/>
+						<br/>
+
+						Finns många features inkluderade i SvelteJS, men om vi inte använder dem kommer dem inte komma med i Bundlen, vilket leder till en bättre UX. Utvecklare vill ha tillgång till många features, men inte behöva betala för dem man inte använder
+						<br/>
+						<br/>
+
+						Performance är viktigt, det som framförallt är viktigt gällande performance är User performance. I det räknar jag in laddningstider för våra script, samt att applikationen är snabb nog att reagera på användar event. Där tycker jag att Svelte har tagit nivån ytterligare ett steg. Också att Svelte fungerar bättre på mindre kraftfulla enheter.
+					</aside>
+				</section>
+				<section><h1>Frågor?</h1></section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>

@@ -4,11 +4,13 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Why you should know VueJS</title>
 
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/main.css">
 		<link rel="stylesheet" href="css/theme/black.css">
+		
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/monokai.css">
@@ -23,11 +25,250 @@
 		</script>
 	</head>
 	<body>
+						
+	<section>
+		</section>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<h1>Why you should know VueJS</h1>
+					<aside class="notes">
+						<ul>
+							<li>Welcome</li>
+							<li>VueJS 2</li>
+							<li>VueJS 3</li>
+						</ul>
+						
+						Hi, and welcome to my talk about VueJS. Really exiced to be here today and talk with you about 
+						First I want to mention, that this is a presentation on how Vue works in version 2.
+
+						In the end we will talk some about whats coming in version 3, but the examples and explanations will
+						be about how Vue works in V2.
+					</aside>
+				</section>
+				<section class="full-screen">
+					<h1>How am I?</h1>
+					<div style="display: flex;">
+						<img width="40%" src="img/profilbild.jpg" />
+						<ul>
+							<li>Marcus Stamström</li>
+							<li>Live and work in Uppsala</li>
+							<li>Software developer at Consid</li>
+						</ul>
+					</div>
+					<aside class="notes">
+						<ul>
+							<li>Uppsala</li>
+							<li>Gothenburg</li>
+							<li>Software developer at consid, 2+</li>
+							<li>ACE Interact</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="full-screen">
+					<img src="img/angular.png" style="height: 40%" />
+					<img src="img/react.png" style="height: 40%" />
+					<img src="img/vue.png" style="height: 40%" />
+					<aside class="notes">
+						<ul>
+							<li>AngularJS, 2014</li>
+							<li>React 2015, Angular and now VueJS</li>
+							<li>Facinating, power of web development, moving logic</li>
+							<li>power of javascript?</li>
+							<li>Not ES5</li>
+							<li>the community, easy to learn language, inclusive in community</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h3>Interacitity</h3>
+					<img src="img/interactive-website.gif" />
+				</section>
+				<section>
+					<h3>Why you need a UI framwork</h3>
+					<ul>
+						<li>More logic to handle</li>
+						<li class="fragment fade-up">focus on development</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>Dont always need a UI framework</li>
+							<li>SPA applications</li>
+							<li>performance gains, bundle sizes </li>
+							<li>updating the DOM</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="full-screen">
+					<section>
+						<h3>What is VueJS?</h3>
+						<img src="img/VueJS.PNG" />
+						<aside class="notes">
+							<ul>
+								<li>What is VueJS? UI library</li>
+								<li>Progressive, state management, routing</li>
+								<li>like React?</li>
+								<li>The whole ecosystem</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h3>VueJS - structure</h3>
+						<img src="img/component-tree.PNG"/>
+						<aside class="notes">
+							<ul>
+								<li>Gives structure, component, mixings etc.</li>
+								<li>Divide page in blocks</li>
+								<li>Reusable components</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h3>VueJS - approchable</h3>
+						<iframe src="https://codesandbox.io/embed/vue-template-y94m0?fontsize=14&hidenavigation=1&module=%2Fsrc%2FApp.vue" title="Vue Template" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+						<aside class="notes">
+							<ul>
+								<li>
+									Javscript, HTML and CSS, nothing else!
+								</li>
+								<li>
+									Single file components
+								</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h3>VueJS - performance</h3>
+						<ul>
+							<li>Small library</li>
+							<li class="fragment fade-up">Built in optimisation</li>
+						</ul>
+						<aside class="notes">
+							<ul>
+								<li>Quite small framework, download</li>
+								<li>Component optimisation, caching updates</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h3>Why you should use VueJS?</h3>
+						<ul>
+							<li>progressive</li>
+							<li class="fragment fade-up">structure</li>
+							<li class="fragment fade-up">approchable</li>
+							<li class="fragment fade-up">performant</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<h1>How to develop with VueJS</h1>
+					<aside class="notes">
+						Gå igenom:
+						- data
+						- methods
+						- computed
+						- scoped CSS
+						- if
+						- v-for
+					</aside>
+				</section>
+				<section>
+					<section class="full-screen">
+						<h3>How VueJS updates the DOM</h3>
+						<img src="img/VDOM-1.PNG" />
+						<aside class="notes">
+							So, we just said that VueJS is performant because the main library is small and has built in optimisation.
+							But how performant are the dom updates?
+
+							First lets walk through how the update process works.
+
+							Consider our previous example, at startup our app component will mount and thereby return a slice of virtual DOM.
+							Virtual DOM? Yeah, that is an internal representation of the actual DOM given by the components in the componentTree.
+
+							Any why, so our app component return a slice of virtual DOM, like this
+						</aside>
+					</section>
+					<section class="full-screen">
+						<h3>How VueJS updates the DOM</h3>
+						<div style="display: flex">
+							<img src="img/VDOM-2.PNG"/>
+							<ul> 
+									<li> Diff &lt;div&gt;
+										<ul>
+											<li>
+													Diff props of &lt;div&gt;
+											</li>
+											<li>
+													Diff children of &lt;div&gt;
+											</li>
+											<ul>
+												<li>
+													Diff "count is {{count}}"
+												</li>
+												<li>
+													Diff button...
+												</li>
+											</ul>
+										</ul>
+									</li>
+								</ul>
+						</div>
+						<aside class="notes">
+							<ul>
+								<li>
+									Expensive to do DOM diffing
+								</li>
+								<li>
+									Even more expensive to rerender the component
+								</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<h3>Why use a virtual DOM?</h3>
+						<aside class="notes">
+							SO why use a virtual DOM, seems like a lot of work for just to update a 0 to a 1.
+							First its an relatively easy approach, since we dont need to track data flow through our application.
+
+							Also the virtual DOM thought is based on the assumption the components are cheap to rerender 
+							but expensive to update in the DOM. If we have components that are expensive to rerender, then 
+							that will slow down the whole update.
+
+							I also dont think this is the part where VueJS shines. But spoiler, it will become better.
+						</aside>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Whats coming in version 3</h3>
+						<ul>
+							<li>Faster</li>
+							<li>Smaller</li>
+							<li>More power</li>
+						</ul>
+						<aside class="notes">
+							<ul>
+								<li>(Faster) Block component update</li>
+								<li>(Faster) Static hoisting</li>
+								<li>(Smaller) treeshakable libraries</li>
+								<li>(Power) Timeslicing</li>
+								<li>(Power) Reactivity API</li>
+								<li>(Power) Composition API</li>
+							</ul>
+						</aside>
+					</section>
+				</section>
+				<section>
+					<h1>Thank you for listening!</h1>
+					<aside class="notes">
+						<ul>
+							<li>Questions</li>
+							<li>Find me on twitter or on the practical dev</li>
+						</ul>
+					</aside>
+				</section>
 			</div>
+			<span class="footer">@mStamstrom</span>
 		</div>
 
 		<script src="js/reveal.js"></script>
